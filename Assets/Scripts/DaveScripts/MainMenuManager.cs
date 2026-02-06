@@ -12,6 +12,6 @@ public class MainMenuManager : MonoBehaviour
 
     public void OnClickStart()
     {
-        SceneManager.LoadScene("Introduction");
+        SceneManager.LoadScene("Intro");
     }
 }
