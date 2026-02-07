@@ -51,12 +51,4 @@ public class PlayerMovement : MonoBehaviour
   void Update()
   {
   }
-
-  void OnTriggerEnter2D(Collider2D collision)
-  {
-    if (collision.gameObject.TryGetComponent(out WinZone winZone))
-    {
-      SceneManager.LoadScene("Win");
-    }
-  }
 }

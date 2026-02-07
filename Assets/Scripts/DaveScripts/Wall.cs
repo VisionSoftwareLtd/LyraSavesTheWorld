@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class WinZone : MonoBehaviour
+public class Wall : MonoBehaviour
 {
   void Start()
   {
