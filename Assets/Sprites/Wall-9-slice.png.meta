@@ -1,19 +1,10 @@
 fileFormatVersion: 2
-guid: 4e9f6cc85fea5c04da8c53ddf6b2556a
+guid: 810c4d6ec3585db4da048a09694cacde
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1562999375785676637
-    second: LyraProjectile_0
-  - first:
-      213: 4441637264419938482
-    second: LyraProjectile_1
-  - first:
-      213: -1774949565803201082
-    second: LyraProjectile_2
-  - first:
-      213: -2178932635938925469
-    second: LyraProjectile_3
+      213: 6737367778579931126
+    second: Wall-9-slice_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -57,7 +48,7 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 2
   spriteExtrude: 1
-  spriteMeshType: 1
+  spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
@@ -122,89 +113,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: LyraProjectile_0
+      name: Wall-9-slice_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 64
         height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 12, y: 0, z: 12, w: 12}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d5fccd1b6a3e0b510800000000000000
-      internalID: 1562999375785676637
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: LyraProjectile_1
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 2b063e62f8dd3ad30800000000000000
-      internalID: 4441637264419938482
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: LyraProjectile_2
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 6cdf01426cc1e57e0800000000000000
-      internalID: -1774949565803201082
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: LyraProjectile_3
-      rect:
-        serializedVersion: 2
-        x: 192
-        y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 364da55ef40e2c1e0800000000000000
-      internalID: -2178932635938925469
+      spriteID: 6ff5b6b6c40ff7d50800000000000000
+      internalID: 6737367778579931126
       vertices: []
       indices: 
       edges: []
@@ -213,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 6de1ab2dec1271f429d0cd3abdc72549
+    spriteID: cc67dcf69595e924bb3da53fff4ad47b
     internalID: 0
     vertices: []
     indices: 
@@ -221,14 +146,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries:
-      - key: SpriteEditor.SliceSettings
-        value: '{"sliceOnImport":false,"gridCellCount":{"x":4.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
+      entries: []
     nameFileIdTable:
-      LyraProjectile_0: 1562999375785676637
-      LyraProjectile_1: 4441637264419938482
-      LyraProjectile_2: -1774949565803201082
-      LyraProjectile_3: -2178932635938925469
+      Wall-9-slice_0: 6737367778579931126
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

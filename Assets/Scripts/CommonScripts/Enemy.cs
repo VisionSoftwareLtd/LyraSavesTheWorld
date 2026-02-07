@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D)), RequireComponent(typeof(Collider2D))]
@@ -17,5 +18,10 @@ public class Enemy : MonoBehaviour
     {
       player.TakeDamage(10f);
     }
+  }
+
+  internal void Hit(LyraProjectile lyraProjectile)
+  {
+    Destroy(gameObject);
   }
 }
