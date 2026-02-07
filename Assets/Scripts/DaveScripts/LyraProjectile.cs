@@ -1,4 +1,4 @@
-using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(Animator)), RequireComponent(typeof(Rigidbody2D))]
@@ -22,10 +22,6 @@ public class LyraProjectile : MonoBehaviour
     rb.linearVelocity = initialDirection * speed;
   }
 
-  void Update()
-  {
-  }
-
   internal void Initialise(Vector2 direction)
   {
     initialDirection = direction.normalized;
@@ -35,8 +31,16 @@ public class LyraProjectile : MonoBehaviour
   {
     if (collision.gameObject.CompareTag("CausesUpgrade"))
     {
-      isUpgraded = true;
-      animator.SetBool("IsUpgraded", true);
+      if (isUpgraded)
+      {
+        Destroy(gameObject);
+      }
+      else
+      {
+        isUpgraded = true;
+        animator.SetBool("IsUpgraded", true);
+        SoundManager.instance.PlaySoundRandomPitch("ShotBounce");
+      }
     }
     else if (collision.gameObject.TryGetComponent(out Enemy enemy))
     {

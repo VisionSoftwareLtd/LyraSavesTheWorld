@@ -39,5 +39,6 @@ public class PlayerShoot : MonoBehaviour
     Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(mouseScreenPos);
     Vector2 direction = (mouseWorldPos - shotStartPos.transform.position).normalized;
     projectile.Initialise(direction);
+    SoundManager.instance.PlaySoundRandomPitch("LyraShoot");
   }
 }

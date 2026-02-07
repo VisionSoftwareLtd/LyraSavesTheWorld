@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D)), RequireComponent(typeof(Collider2D))]
@@ -17,11 +16,13 @@ public class Enemy : MonoBehaviour
     if (collision.gameObject.TryGetComponent(out Player player))
     {
       player.TakeDamage(10f);
+      SoundManager.instance.PlaySoundRandomPitch($"Hurt{Random.Range(1, 4)}");
     }
   }
 
   internal void Hit(LyraProjectile lyraProjectile)
   {
+    SoundManager.instance.PlaySoundRandomPitch("MonsterDie");
     Destroy(gameObject);
   }
 }

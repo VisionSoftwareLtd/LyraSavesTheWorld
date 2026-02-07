@@ -44,6 +44,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57ccb190615a0a341999ec239db518f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioClips: []
-  musicClips: []
+  audioClips:
+  - {fileID: 8300000, guid: e26f76afefd55b54cb1bfc6dfbfa20e5, type: 3}
+  - {fileID: 8300000, guid: 2d9299714c527754490745c5b1641919, type: 3}
+  - {fileID: 8300000, guid: 03d7c8d6dbee930409c0dc26fbee7228, type: 3}
+  - {fileID: 8300000, guid: c4989bcaca8ecd345aa9a21f48bbf1bc, type: 3}
+  - {fileID: 8300000, guid: 31b5e608fcc10694ab52ca4c1dc8f849, type: 3}
+  - {fileID: 8300000, guid: 497025864903a2841ac225aa546c3998, type: 3}
+  - {fileID: 8300000, guid: 4d08c5befa95b054cbe82a17b483050a, type: 3}
+  - {fileID: 8300000, guid: 4cb0245cc2fdfc840b4d1b38adfcff6a, type: 3}
+  - {fileID: 8300000, guid: f40b3f458bd01ab4dab9f180621bcc15, type: 3}
+  - {fileID: 8300000, guid: 0b35e5f0cffe45f4a8af7472d0ef4f9d, type: 3}
+  - {fileID: 8300000, guid: 31b88a4f15e9c4846a27dadd5bde57d3, type: 3}
+  musicClips:
+  - {fileID: 8300000, guid: 57d3c1faae90c7949b3ac208a01645a8, type: 3}
+  - {fileID: 8300000, guid: 29ed27af027eb3542a79709dd2fca605, type: 3}
+  - {fileID: 8300000, guid: 2fc9b854910a7ef449414d8d1f060418, type: 3}
+  - {fileID: 8300000, guid: 57be178fec555634b9f467ec38ebe77d, type: 3}
+  - {fileID: 8300000, guid: 29c883cd012e9b944a4357839eb7d249, type: 3}
+  - {fileID: 8300000, guid: a1bd56bc8a32af94e991d971a2f210d0, type: 3}
+  - {fileID: 8300000, guid: f511156f465b83a47ab1442cfe197745, type: 3}
   numAudioSources: 10
