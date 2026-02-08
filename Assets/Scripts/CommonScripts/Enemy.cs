@@ -33,8 +33,13 @@ public class Enemy : MonoBehaviour
 
   public virtual void Hit(LyraProjectile lyraProjectile)
   {
+    Damageable damageable = GetComponent<Damageable>();
+    if (damageable != null && !damageable.CanDamage(lyraProjectile))
+    {
+      return;
+    }
     SoundManager.instance.PlaySoundRandomPitch("MonsterDie");
     Destroy(gameObject);
-    Destroy(lyraProjectile.gameObject);
+    if (!lyraProjectile.IsUpgraded) Destroy(lyraProjectile.gameObject);
   }
 }

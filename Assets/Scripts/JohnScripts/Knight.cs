@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D)), RequireComponent(typeof(Animator))]
-public class Knight : MonoBehaviour
+public class Knight : MonoBehaviour, Damageable
 {
   public enum KnightState
   {
@@ -68,5 +68,10 @@ public class Knight : MonoBehaviour
         animator.SetBool("IsAttacking", false);
       }
     }
+  }
+
+  public bool CanDamage(LyraProjectile lyraProjectile)
+  {
+    return lyraProjectile.IsUpgraded;
   }
 }

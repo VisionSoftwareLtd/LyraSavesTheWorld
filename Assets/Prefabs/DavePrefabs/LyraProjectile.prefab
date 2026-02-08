@@ -48,7 +48,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 861bca12a42e97944a433be124aa5077, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LyraProjectile
-  isUpgraded: 0
   speed: 3
 --- !u!212 &4681947679034846013
 SpriteRenderer:
@@ -142,7 +141,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 0.0001
+  m_Mass: 0.1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_GravityScale: 0

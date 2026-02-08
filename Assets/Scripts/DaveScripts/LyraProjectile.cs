@@ -1,10 +1,9 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(Animator)), RequireComponent(typeof(Rigidbody2D))]
 public class LyraProjectile : MonoBehaviour
 {
-  [SerializeField] private bool isUpgraded = false;
+  public bool IsUpgraded { get; private set; } = false;
   [SerializeField] private float speed = 10f;
   private Animator animator;
   private Rigidbody2D rb;
@@ -13,7 +12,7 @@ public class LyraProjectile : MonoBehaviour
   void Awake()
   {
     animator = GetComponent<Animator>();
-    animator.SetBool("IsUpgraded", isUpgraded);
+    animator.SetBool("IsUpgraded", IsUpgraded);
     rb = GetComponent<Rigidbody2D>();
   }
 
@@ -31,13 +30,13 @@ public class LyraProjectile : MonoBehaviour
   {
     if (collision.gameObject.CompareTag("CausesUpgrade"))
     {
-      if (isUpgraded)
+      if (IsUpgraded)
       {
         Destroy(gameObject);
       }
       else
       {
-        isUpgraded = true;
+        IsUpgraded = true;
         animator.SetBool("IsUpgraded", true);
         SoundManager.instance.PlaySoundRandomPitch("ShotBounce");
       }

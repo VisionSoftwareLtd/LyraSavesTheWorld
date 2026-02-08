@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
-public class Cultist : MonoBehaviour
+public class Cultist : MonoBehaviour, Damageable
 {
   [SerializeField] private int facing = 0;
   private Animator animator;
@@ -22,4 +22,10 @@ public class Cultist : MonoBehaviour
   {
     audioSource.pitch = pitch;
   }
+
+  public bool CanDamage(LyraProjectile lyraProjectile)
+  {
+    return lyraProjectile.IsUpgraded;
+  }
+
 }
