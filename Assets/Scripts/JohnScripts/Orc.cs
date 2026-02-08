@@ -6,9 +6,9 @@ public class Orc : MonoBehaviour
     Rigidbody2D rb;
     Transform target;
     Vector2 moveDirection;
-    private void Awake() 
-    { 
-        rb = GetComponent<Rigidbody2D>(); 
+    private void Awake()
+    {
+        rb = GetComponent<Rigidbody2D>();
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()

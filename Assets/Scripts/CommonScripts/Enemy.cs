@@ -13,6 +13,7 @@ public class Enemy : MonoBehaviour
 
     public virtual void Hit(LyraProjectile lyraProjectile)
     {
-
+        SoundManager.instance.PlaySoundRandomPitch("MonsterDie");
+        Destroy(gameObject);
     }
 }

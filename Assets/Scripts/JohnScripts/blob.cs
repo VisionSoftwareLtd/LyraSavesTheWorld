@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class blob : MonoBehaviour
+public class Blob : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 2f;
     Rigidbody2D rb;
@@ -20,7 +20,7 @@ public class blob : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(target)
+        if (target)
         {
             Vector3 direction = (target.position - transform.position).normalized;
             moveDirection = direction;
@@ -29,7 +29,7 @@ public class blob : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(target)
+        if (target)
         {
             rb.linearVelocity = new Vector2(moveDirection.x, moveDirection.y) * moveSpeed;
         }
