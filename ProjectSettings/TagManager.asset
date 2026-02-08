@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 3
   tags:
   - CausesUpgrade
+  - Projectile
   layers:
   - Default
   - TransparentFX
