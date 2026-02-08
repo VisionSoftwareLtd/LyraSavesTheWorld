@@ -8,12 +8,15 @@ public class LyraProjectile : MonoBehaviour
   private Animator animator;
   private Rigidbody2D rb;
   private Vector2 initialDirection;
+  private ParticleSystem upgradeParticles;
 
   void Awake()
   {
     animator = GetComponent<Animator>();
     animator.SetBool("IsUpgraded", IsUpgraded);
     rb = GetComponent<Rigidbody2D>();
+    upgradeParticles = GetComponentInChildren<ParticleSystem>();
+    upgradeParticles.Stop();
   }
 
   void Start()
@@ -39,6 +42,7 @@ public class LyraProjectile : MonoBehaviour
         IsUpgraded = true;
         animator.SetBool("IsUpgraded", true);
         SoundManager.instance.PlaySoundRandomPitch("ShotBounce");
+        upgradeParticles.Play();
       }
     }
     else if (collision.gameObject.TryGetComponent(out Enemy enemy))

@@ -11,24 +11,27 @@ public class GameManager : MonoBehaviour
     instance = this;
   }
 
-  private int gameStage = 0; // Increases by 1 each time a ritual is disrupted.
+  public int GameStage { get; private set; } = 0; // Increases by 1 each time a ritual is disrupted.
+  public UI UI;
 
   IEnumerator Start()
   {
     yield return null;
-    SoundManager.instance.PlayMusic($"Game{gameStage + 1}");
+    SoundManager.instance.PlayMusic($"Game{GameStage + 1}");
+    UI.SetRitualText(GameStage);
   }
 
   public void RitualDisrupted()
   {
-    gameStage++;
-    if (gameStage == 4)
+    GameStage++;
+    if (GameStage == 4)
     {
       SceneManager.LoadScene("Win");
     }
     else
     {
-      SoundManager.instance.PlayMusic($"Game{gameStage + 1}");
+      SoundManager.instance.PlayMusic($"Game{GameStage + 1}");
+      UI.SetRitualText(GameStage);
     }
   }
 }

@@ -19,11 +19,16 @@ public class Knight : MonoBehaviour, Damageable
   private KnightState currentState;
   private Vector2 moveDirection;
   private float finishAttackTime;
+  private Material enemyMaterial;
+  private float shieldFlashRatio = 0f;
 
   private void Awake()
   {
     rb = GetComponent<Rigidbody2D>();
     animator = GetComponent<Animator>();
+    SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
+    enemyMaterial = new Material(spriteRenderer.material);
+    spriteRenderer.material = enemyMaterial;
   }
 
   void Start()
@@ -38,6 +43,15 @@ public class Knight : MonoBehaviour, Damageable
     {
       Vector3 direction = (target.transform.position - transform.position).normalized;
       moveDirection = direction;
+    }
+    if (shieldFlashRatio > 0f)
+    {
+      enemyMaterial.SetFloat("_ShieldRatio", shieldFlashRatio);
+      shieldFlashRatio -= Time.deltaTime * 2f;
+    }
+    else
+    {
+      enemyMaterial.SetFloat("_ShieldRatio", 0f);
     }
   }
 
@@ -74,5 +88,11 @@ public class Knight : MonoBehaviour, Damageable
   public bool CanDamage(LyraProjectile lyraProjectile)
   {
     return lyraProjectile.IsUpgraded;
+  }
+
+  public void NonDamagingHit()
+  {
+    SoundManager.instance.PlaySoundRandomPitch("MonsterProtected");
+    shieldFlashRatio = 1f;
   }
 }

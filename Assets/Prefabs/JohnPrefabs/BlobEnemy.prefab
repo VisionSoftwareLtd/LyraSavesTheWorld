@@ -49,6 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5d1ed1ab56191840a413ba48e3c8edf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
+  shadow: {fileID: 0}
 --- !u!114 &8932340303658263469
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -61,7 +62,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1598e62df4f47741bb27552edcb343f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::blob
-  moveSpeed: 0.5
+  moveSpeed: 0.7
 --- !u!212 &1197850802353797108
 SpriteRenderer:
   m_ObjectHideFlags: 0
