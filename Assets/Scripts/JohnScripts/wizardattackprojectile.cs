@@ -4,14 +4,14 @@ public class WizardAttackProjectile : MonoBehaviour
 {
     [SerializeField] private float speed;
 
-    private Transform player;
+    private Player player;
     private Vector2 target;
 
     void Start()
     {
-        player = GameObject.Find("Player").transform;
+        player = FindFirstObjectByType<Player>();
 
-        target = new Vector2(player.position.x, player.position.y);
+        target = new Vector2(player.transform.position.x, player.transform.position.y);
     }
 
     void Update()

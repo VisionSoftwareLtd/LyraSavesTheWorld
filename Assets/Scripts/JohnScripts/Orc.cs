@@ -3,8 +3,10 @@ using UnityEngine;
 public class Orc : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 2f;
+    [SerializeField] private Vector2 retargetIntervalRange = new Vector2(2f, 5f);
+    private float nextRetargetTime;
     Rigidbody2D rb;
-    Transform target;
+    Player target;
     Vector2 moveDirection;
     private void Awake()
     {
@@ -13,13 +15,19 @@ public class Orc : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        target = GameObject.Find("Player").transform;
+        SetTarget();
+    }
+
+    private void SetTarget()
+    {
+        target = FindFirstObjectByType<Player>();
 
         if (target)
         {
-            Vector3 direction = (target.position - transform.position).normalized;
+            Vector3 direction = (target.transform.position - transform.position).normalized;
             moveDirection = direction;
         }
+        nextRetargetTime = Time.time + Random.Range(retargetIntervalRange.x, retargetIntervalRange.y);
     }
 
     private void FixedUpdate()
@@ -27,6 +35,14 @@ public class Orc : MonoBehaviour
         if (target)
         {
             rb.linearVelocity = moveDirection * moveSpeed;
+        }
+    }
+
+    private void Update()
+    {
+        if (Time.time >= nextRetargetTime)
+        {
+            SetTarget();
         }
     }
 }

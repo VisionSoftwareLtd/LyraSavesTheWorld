@@ -1,52 +1,6 @@
-//using UnityEngine;
-
-//public class Wizard : MonoBehaviour
-//{
-//    [SerializeField] private float speed;
-//    [SerializeField] private float stoppingDistance;
-//    [SerializeField] private float retreatDistance;
-
-//    private float timeBtwShots;
-//    [SerializeField] private float startTimeBtwShots;
-
-//    [SerializeField] private GameObject projectile;
-//    [SerializeField] private Transform player;
-//    // Start is called once before the first execution of Update after the MonoBehaviour is created
-//    void Start()
-//    {
-//        player = GameObject.Find("Player").transform;
-//        timeBtwShots = startTimeBtwShots;
-//    }
-
-//    // Update is called once per frame
-//    void Update()
-//    {
-//        if(Vector2.Distance(transform.position, player.position)>stoppingDistance)
-//        {
-//            transform.position = Vector2.MoveTowards(transform.position, player.position, speed * Time.deltaTime);
-//        }
-//        else if (Vector2.Distance(transform.position, player.position) < stoppingDistance && Vector2.Distance(transform.position, player.position) > retreatDistance)
-//        {
-//            transform.position = this.transform.position;
-//        }
-//        else if (Vector2.Distance(transform.position, player.position) < retreatDistance)
-//        {
-//            transform.position = Vector2.MoveTowards(transform.position, player.position, -speed * Time.deltaTime);
-//        }
-
-//        if(timeBtwShots <= 0)
-//        {
-//            Instantiate(projectile, transform.position, Quaternion.identity);
-//            timeBtwShots = startTimeBtwShots;
-//        }
-//        else
-//        {
-//             timeBtwShots -= Time.deltaTime;
-//        }
-//    }
-//}
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D)), RequireComponent(typeof(Animator))]
 public class Wizard : MonoBehaviour
 {
     [Header("Movement")]
@@ -57,19 +11,29 @@ public class Wizard : MonoBehaviour
     [Header("Attack")]
     [SerializeField] private float startTimeBtwShots = 1.5f;
     [SerializeField] private GameObject projectile;
+    [SerializeField] private Transform firePoint;
 
     private float timeBtwShots;
-    private Transform player;
+    private Player player;
+    private Rigidbody2D rb;
+    private Vector2 moveDirection;
+    private Animator animator;
+
+    private void Awake()
+    {
+        rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
+    }
 
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").transform;
-        timeBtwShots = 0f; 
+        player = FindFirstObjectByType<Player>();
+        timeBtwShots = 0f;
     }
 
     void Update()
     {
-        float distance = Vector2.Distance(transform.position, player.position);
+        float distance = Vector2.Distance(transform.position, player.transform.position);
 
         HandleMovement(distance);
         HandleShooting(distance);
@@ -79,16 +43,21 @@ public class Wizard : MonoBehaviour
     {
         if (distance > stoppingDistance)
         {
-            transform.position = Vector2.MoveTowards(
-                transform.position,
-                player.position,
-                speed * Time.deltaTime
-            );
+            // Move towards player
+            moveDirection = (player.transform.position - transform.position).normalized;
+            animator.SetBool("IsAttacking", false);
         }
         else if (distance < retreatDistance)
         {
-            Vector2 dir = (transform.position - player.position).normalized;
-            transform.position += (Vector3)(dir * speed * Time.deltaTime);
+            // Move away from player
+            moveDirection = (transform.position - player.transform.position).normalized;
+            animator.SetBool("IsAttacking", false);
+        }
+        else
+        {
+            // In optimal range - stop moving
+            moveDirection = Vector2.zero;
+            animator.SetBool("IsAttacking", true);
         }
     }
 
@@ -98,7 +67,7 @@ public class Wizard : MonoBehaviour
         {
             if (timeBtwShots <= 0f)
             {
-                Instantiate(projectile, transform.position, Quaternion.identity);
+                Instantiate(projectile, firePoint.position, Quaternion.identity);
                 timeBtwShots = startTimeBtwShots;
             }
             else
@@ -106,5 +75,10 @@ public class Wizard : MonoBehaviour
                 timeBtwShots -= Time.deltaTime;
             }
         }
+    }
+
+    private void FixedUpdate()
+    {
+        rb.linearVelocity = moveDirection * speed;
     }
 }
