@@ -5,7 +5,6 @@ public class EnemySpawner : MonoBehaviour
   [SerializeField] private Enemy[] enemiesToSpawn;
   [SerializeField] private float spawnInterval = 2f;
   [SerializeField] private float spawnDistanceFromEdge = 1f;
-  [SerializeField] private int superSpawnIfMobCountBelow = 15;
 
   private float nextSpawnTime;
   private Camera mainCamera;
@@ -34,7 +33,7 @@ public class EnemySpawner : MonoBehaviour
   void SetNextSpawnTime()
   {
     int currentMobCount = transform.childCount;
-    if (currentMobCount < superSpawnIfMobCountBelow)
+    if (currentMobCount < PersistentData.instance.superSpawnIfMobCountBelow)
     {
       nextSpawnTime = Time.time + spawnInterval / 5f;
     }
@@ -62,45 +61,52 @@ public class EnemySpawner : MonoBehaviour
     // Get screen bounds in world space
     float camHeight = mainCamera.orthographicSize;
     float camWidth = camHeight * mainCamera.aspect;
-
-    // Choose a random edge: 0 = top, 1 = bottom, 2 = left, 3 = right
-    int edge = Random.Range(0, 4);
-    Vector3 spawnPos = Vector3.zero;
-
-    switch (edge)
+    Vector3 worldSpawnPos = Vector3.zero;
+    for (int attempts = 0; attempts < 10; attempts++)
     {
-      case 0: // Top
-        spawnPos = new Vector3(
-          Random.Range(-camWidth, camWidth),
-          camHeight + spawnDistanceFromEdge,
-          0f
-        );
-        break;
-      case 1: // Bottom
-        spawnPos = new Vector3(
-          Random.Range(-camWidth, camWidth),
-          -camHeight - spawnDistanceFromEdge,
-          0f
-        );
-        break;
-      case 2: // Left
-        spawnPos = new Vector3(
-          -camWidth - spawnDistanceFromEdge,
-          Random.Range(-camHeight, camHeight),
-          0f
-        );
-        break;
-      case 3: // Right
-        spawnPos = new Vector3(
-          camWidth + spawnDistanceFromEdge,
-          Random.Range(-camHeight, camHeight),
-          0f
-        );
-        break;
-    }
+      // Choose a random edge: 0 = top, 1 = bottom, 2 = left, 3 = right
+      int edge = Random.Range(0, 4);
+      Vector3 spawnPos = Vector3.zero;
 
-    Vector3 worldSpawnPos = mainCamera.transform.position + spawnPos;
-    worldSpawnPos.z = 0f;
+      switch (edge)
+      {
+        case 0: // Top
+          spawnPos = new Vector3(
+            Random.Range(-camWidth, camWidth),
+            camHeight + spawnDistanceFromEdge,
+            0f
+          );
+          break;
+        case 1: // Bottom
+          spawnPos = new Vector3(
+            Random.Range(-camWidth, camWidth),
+            -camHeight - spawnDistanceFromEdge,
+            0f
+          );
+          break;
+        case 2: // Left
+          spawnPos = new Vector3(
+            -camWidth - spawnDistanceFromEdge,
+            Random.Range(-camHeight, camHeight),
+            0f
+          );
+          break;
+        case 3: // Right
+          spawnPos = new Vector3(
+            camWidth + spawnDistanceFromEdge,
+            Random.Range(-camHeight, camHeight),
+            0f
+          );
+          break;
+      }
+
+      worldSpawnPos = mainCamera.transform.position + spawnPos;
+      worldSpawnPos.z = 0f;
+      if (spawnArea == null || spawnArea.bounds.Contains(worldSpawnPos))
+      {
+        return worldSpawnPos;
+      }
+    }
 
     // Clamp position to be inside the spawn area bounds
     if (spawnArea != null)

@@ -3,6 +3,11 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D)), RequireComponent(typeof(Collider2D)), RequireComponent(typeof(SpriteRenderer))]
 public class Enemy : MonoBehaviour
 {
+  public enum State
+  {
+    Spawning,
+    Active
+  }
   [SerializeField] private GameObject shadow;
   private SpriteRenderer spriteRenderer;
   private Rigidbody2D rb;
@@ -10,6 +15,10 @@ public class Enemy : MonoBehaviour
   private Player collidingWithPlayer = null;
   private float maxOffScreenTime = 4f;
   private float offScreenDestroyTime;
+  private State currentState = State.Spawning;
+  private float scale = 0f;
+  private float spawnScaleSpeed = 3f;
+  private bool isCultist = false;
 
   void Awake()
   {
@@ -23,29 +32,15 @@ public class Enemy : MonoBehaviour
 
   void Start()
   {
-    if (GetComponent<Cultist>() == null)
+    isCultist = GetComponent<Cultist>() != null;
+    if (!isCultist)
     {
       offScreenDestroyTime = Time.time + maxOffScreenTime;
-    }
-    else
-    {
-      offScreenDestroyTime = float.PositiveInfinity;
     }
   }
 
   private void Update()
   {
-    if (IsOffScreen())
-    {
-      if (Time.time >= offScreenDestroyTime)
-      {
-        Destroy(gameObject);
-      }
-    }
-    else
-    {
-      offScreenDestroyTime = Time.time + maxOffScreenTime;
-    }
     if (rb.linearVelocityX < 0)
     {
       spriteRenderer.flipX = true;
@@ -62,6 +57,31 @@ public class Enemy : MonoBehaviour
         shadow.transform.localPosition = new Vector3(initialShadowXPos, shadow.transform.localPosition.y, shadow.transform.localPosition.z);
       }
     }
+
+    if (currentState == State.Spawning)
+    {
+      scale += Time.deltaTime * spawnScaleSpeed;
+      if (scale >= 1f)
+      {
+        scale = 1f;
+        currentState = State.Active;
+      }
+      transform.localScale = Vector3.one * scale;
+      return;
+    }
+
+    if (IsOffScreen() && !isCultist)
+    {
+      if (Time.time >= offScreenDestroyTime)
+      {
+        Destroy(gameObject);
+      }
+    }
+    else
+    {
+      offScreenDestroyTime = Time.time + maxOffScreenTime;
+    }
+
     if (collidingWithPlayer)
     {
       if (collidingWithPlayer != null) collidingWithPlayer.TakeDamage(10);
