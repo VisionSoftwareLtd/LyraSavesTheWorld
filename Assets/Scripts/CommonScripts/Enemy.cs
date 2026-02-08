@@ -27,7 +27,7 @@ public class Enemy : MonoBehaviour
   {
     if (collision.gameObject.TryGetComponent(out Player player))
     {
-      // player.TakeDamage(10f);
+      player.TakeDamage(10f);
     }
   }
 
@@ -36,6 +36,7 @@ public class Enemy : MonoBehaviour
     Damageable damageable = GetComponent<Damageable>();
     if (damageable != null && !damageable.CanDamage(lyraProjectile))
     {
+      SoundManager.instance.PlaySoundRandomPitch("MonsterHurt");
       return;
     }
     SoundManager.instance.PlaySoundRandomPitch("MonsterDie");

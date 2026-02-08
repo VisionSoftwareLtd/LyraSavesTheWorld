@@ -57,6 +57,7 @@ public class Knight : MonoBehaviour, Damageable
           rb.AddForce(direction * attackSpeed, ForceMode2D.Impulse);
           animator.SetBool("IsAttacking", true);
           finishAttackTime = Time.time + attackCooldown;
+          SoundManager.instance.PlaySoundRandomPitch("KnightAttack");
         }
       }
     }

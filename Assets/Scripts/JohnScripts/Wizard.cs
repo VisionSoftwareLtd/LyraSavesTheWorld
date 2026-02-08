@@ -67,6 +67,7 @@ public class Wizard : MonoBehaviour
         {
             if (timeBtwShots <= 0f)
             {
+                SoundManager.instance.PlaySoundRandomPitch("WizardShoot");
                 Instantiate(projectile, firePoint.position, Quaternion.identity);
                 timeBtwShots = startTimeBtwShots;
             }
